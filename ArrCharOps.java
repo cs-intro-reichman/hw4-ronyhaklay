@@ -43,15 +43,11 @@ public class ArrCharOps {
      *  returns true; Otherwise returns false.
      */
     public static boolean equals(char[] arr1, char[] arr2) {
-        if(arr1.length != arr2.length)
-        return false;
-        for(int i = 0; i < arr1.length; i++)
-        {
-            for(int j = 0; j < arr2.length; j++)
-            {
-                if(arr1[i] != arr2[j])
+        if (arr1.length != arr2.length) 
+            return false;
+        for (int i = 0; i < arr1.length; i++) {
+            if (arr1[i] != arr2[i]) 
                 return false;
-            }
         }
         return true;
     }
@@ -100,17 +96,11 @@ public class ArrCharOps {
     /* Returns an array which is the concatanation of the two given arrays.
     */
     public static char[] concat(char[] arr1, char[] arr2) {
-       char[] returnArr = new char[arr1.length + arr2.length];
-       int count = 0;
-       for(int i = 0; i < arr1.length; i++)
-        {
-        returnArr[i] = arr1[i];
-        }
-        for(int j = arr1.length + 1; j < returnArr.length; j++)
-        {
-        returnArr[j] = arr2[count];
-        count++;
-        }
+        char[] returnArr = new char[arr1.length + arr2.length];
+        for (int i = 0; i < arr1.length; i++)
+            returnArr[i] = arr1[i];
+        for (int j = arr1.length; j < returnArr.length; j++)
+            returnArr[j] = arr2[j - arr1.length];
         return returnArr;
     }
 
@@ -120,15 +110,11 @@ public class ArrCharOps {
      *  characters containing the characters "urge".
      */     
     public static char[] subArray(char[] arr, int beginIndex, int endIndex) {
-        if ((endIndex - beginIndex) <= 0 || arr.length == 0 )
+        if (beginIndex < 0 || endIndex > arr.length || beginIndex >= endIndex || arr.length == 0) 
             return null;
         char[] returnArr = new char[endIndex - beginIndex];
-        int count = 0;
-        for(int i = beginIndex; i < endIndex; i++)
-        {
-        returnArr[count] = arr[i];
-        count++;
-        }
+        for (int i = beginIndex; i < endIndex; i++)
+            returnArr[i - beginIndex] = arr[i];
         return returnArr;
     }
 
@@ -179,16 +165,14 @@ public class ArrCharOps {
     public static int compareTo(String str1, String str2) {
         if (str1 == null || str2 == null)
             return -2; 
-        int minumum = Math.min(str1.length(), str2.length());
-        for (int i = 0; i < minumum; i++) {
-            char c1 = str1.charAt(i);
-            char c2 = str2.charAt(i);
-            
-            if (c1 != c2) 
-                return c1 < c2 ? -1 : 1;
-        }
-        if (str1.length() != str2.length()) 
-            return str1.length() < str2.length() ? -1 : 1;
-        return 0; 
+            int minimum = Math.min(str1.length(), str2.length());
+            for (int i = 0; i < minimum; i++) {
+                char c1 = str1.charAt(i);
+                char c2 = str2.charAt(i);
+                if (c1 != c2) {
+                    return c1 - c2;
+                }
+            }
+            return str1.length() - str2.length();
     }
 }
