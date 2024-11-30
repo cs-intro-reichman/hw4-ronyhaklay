@@ -34,16 +34,22 @@ public class MyString {
 
     /** If str1 contains str2, returns true; otherwise returns false. */
     public static boolean contains(String str1, String str2) {
-        String newStr1 = lowerCase(str1);
+        String newStr1 = lowerCase(str1);  // Convert both strings to lowercase
         String newStr2 = lowerCase(str2);
 
-        if (newStr2.isEmpty())
+        if (newStr2.isEmpty())  // If the second string is empty, it is considered contained
             return true;
-            
-        for (int i = 0; i <= newStr1.length() - newStr2.length(); i++) {
-        if (newStr1.substring(i, i + newStr2.length()).equals(newStr2)) 
-            return true;
+
+        if (newStr2.length() > newStr1.length()) {  // If str2 is longer than str1, it can't be contained
+            return false;
         }
-    return false;
+
+        // Check if newStr2 is a substring of newStr1
+        for (int i = 0; i <= newStr1.length() - newStr2.length(); i++) {
+            if (newStr1.substring(i, i + newStr2.length()).equals(newStr2)) {
+                return true;  // Found a match
+            }
+        }
+        return false;  // If no match found, return false
     }
 }
