@@ -36,12 +36,7 @@ public class ArrCharOps {
     /** Returns the char value at the specified index. Assume that the array is non-empty.
      */
     public static char charAt(char[] arr, int index) {
-        for (int i = 0; i < arr.length; i++)
-        {
-            if(i == index)
-            return arr[i];
-        }
-        return 0;
+        return arr[index];
     }
 
     /** If the two arrays have the same value in every index, 
@@ -65,6 +60,8 @@ public class ArrCharOps {
      *  If no such character is found, returns -1.
      */
     public static int indexOf(char[] arr, char ch) {
+        if (arr.length == 0)
+            return -1;
         for(int i = 0; i < arr.length; i++)
         {
             if(arr[i] == ch)
@@ -76,6 +73,8 @@ public class ArrCharOps {
     /** Same as indexOf(char[], char), but starts the search in the given index.
      */
     public static int indexOf(char[] arr, char ch, int fromIndex) {
+        if (arr.length == 0)
+            return -1;
         for(int i = fromIndex; i < arr.length; i++)
         {
             if(arr[i] == ch)
@@ -88,7 +87,9 @@ public class ArrCharOps {
      *  If no such character is found, returns -1.
      */
     public static int lastIndexOf(char[] arr, char ch) {
-        for(int i = arr.length-1 ; i <= 0 ; i--)
+        if (arr.length == 0)
+        return -1;
+        for(int i = arr.length-1 ; i >= 0 ; i--)
         {
             if(arr[i] == ch)
             return i;
@@ -119,9 +120,11 @@ public class ArrCharOps {
      *  characters containing the characters "urge".
      */     
     public static char[] subArray(char[] arr, int beginIndex, int endIndex) {
-       char[] returnArr = new char[endIndex - beginIndex];
-       int count = 0;
-       for(int i = beginIndex; i < endIndex; i++)
+        if ((endIndex - beginIndex) <= 0 || arr.length == 0 )
+            return null;
+        char[] returnArr = new char[endIndex - beginIndex];
+        int count = 0;
+        for(int i = beginIndex; i < endIndex; i++)
         {
         returnArr[count] = arr[i];
         count++;
@@ -174,24 +177,18 @@ public class ArrCharOps {
      *         return -2 if there is an error with the input.
      */
     public static int compareTo(String str1, String str2) {
-        if (str1 == null || str2 == null) {
+        if (str1 == null || str2 == null)
             return -2; 
-        }
-    
-        int minLength = Math.min(str1.length(), str2.length());
-        
-        for (int i = 0; i < minLength; i++) {
+        int minumum = Math.min(str1.length(), str2.length());
+        for (int i = 0; i < minumum; i++) {
             char c1 = str1.charAt(i);
             char c2 = str2.charAt(i);
             
             if (c1 != c2) 
                 return c1 < c2 ? -1 : 1;
-
         }
-    
         if (str1.length() != str2.length()) 
             return str1.length() < str2.length() ? -1 : 1;
-    
         return 0; 
     }
 }
