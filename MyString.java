@@ -34,28 +34,29 @@ public class MyString {
 
     /** If str1 contains str2, returns true; otherwise returns false. */
     public static boolean contains(String str1, String str2) {
-        String newStr1 = lowerCase(str1); 
-        String newStr2 = lowerCase(str2);
-
-        if (newStr2.isEmpty())  
-            return true;
-
-        if (newStr2.length() > newStr1.length()) 
-            return false;
-
+            String newStr1 = lowerCase(str1); 
+            String newStr2 = lowerCase(str2);
+    
+            if (newStr2.isEmpty())  
+                return true;
+    
+            if (newStr2.length() > newStr1.length()) 
+                return false;
+    
             for (int i = 0; i <= newStr1.length() - newStr2.length(); i++) {
-                boolean matchsStrings = true;
-
+                boolean containsStrings = true;
+    
                 for (int j = 0; j < newStr2.length(); j++) {
                     if (newStr1.charAt(i + j) != newStr2.charAt(j)) {
-                        matchsStrings = false;
+                        containsStrings = false;
                         break; 
                     }
                 }
-                if (matchsStrings == true) {
+
+                if (containsStrings == true) {
                     return true;
                 }
             }
             return false;
-    }
+        }
 }
